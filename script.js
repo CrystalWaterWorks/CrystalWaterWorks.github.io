@@ -95,26 +95,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    function validateForm() {
-        let isValid = true;
-        const inputs = contactForm.querySelectorAll('input, textarea');
-        inputs.forEach(input => {
-            if (input.hasAttribute('required') && !input.value.trim()) {
-                showError(input, 'This field is required');
-                isValid = false;
-            } else if (input.type === 'email' && !isValidEmail(input.value)) {
-                showError(input, 'Please enter a valid email address');
-                isValid = false;
-            } else {
-                clearError(input);
-            }
-        });
-        return isValid;
-    }
-
-    function isValidEmail(email) {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    }
+    // Email Form
+    (function(){
+        emailjs.init("OvxBoAeOh8WVtJn3o"); // Replace with your EmailJS user ID
+     })();
 
     function showError(input, message) {
         clearError(input);
