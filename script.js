@@ -73,6 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
     showTestimonial(currentTestimonial);
 
 
+
    // Email Form
 (function () {
     emailjs.init("OvxBoAeOh8WVtJn3o"); // Your User ID
@@ -80,8 +81,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 document.getElementById('contact-form').addEventListener('submit', function(event) {
     event.preventDefault();
+    console.log("Form Submitted");  // Check if the function is triggered
 
-    emailjs.sendForm('service_q2twg0b', 'template_vvuy0mu', this)  
+    emailjs.sendForm('service_q2twg0b', 'template_vvuy0mu', this)
         .then(function() {
             console.log('SUCCESS!');
             alert('Your message has been sent successfully!');
@@ -90,7 +92,6 @@ document.getElementById('contact-form').addEventListener('submit', function(even
             alert('There was an error sending your message. Please try again later or give us a call.');
         });
 });
-
 
     // Animate on scroll
     const animateOnScroll = (entries, observer) => {
