@@ -73,23 +73,24 @@ document.addEventListener('DOMContentLoaded', function() {
     showTestimonial(currentTestimonial);
 
 
-    // Email Form
-    (function () {
-        emailjs.init("OvxBoAeOh8WVtJn3o");
-    })();
-    
-    document.getElementById('contact-form').addEventListener('submit', function(event) {
-        event.preventDefault();
-    
-        emailjs.sendForm('service_q2twg0b', 'service_q2twg0b', this)
-            .then(function() {
-                console.log('SUCCESS!');
-                alert('Your message has been sent successfully!');
-            }, function(error) {
-                console.log('FAILED...', error);
-                alert('There was an error sending your message. Please try again later or give us a call.');
-            });
-    });
+   // Email Form
+(function () {
+    emailjs.init("OvxBoAeOh8WVtJn3o"); // Your User ID
+})();
+
+document.getElementById('contact-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    emailjs.sendForm('service_q2twg0b', 'template_vvuy0mu', this)  
+        .then(function() {
+            console.log('SUCCESS!');
+            alert('Your message has been sent successfully!');
+        }, function(error) {
+            console.log('FAILED...', error);
+            alert('There was an error sending your message. Please try again later or give us a call.');
+        });
+});
+
 
     // Animate on scroll
     const animateOnScroll = (entries, observer) => {
