@@ -72,58 +72,24 @@ document.addEventListener('DOMContentLoaded', function() {
     setInterval(nextTestimonial, 5000);
     showTestimonial(currentTestimonial);
 
-    // Advanced form validation and submission
-    const contactForm = document.getElementById('contact-form');
-    contactForm.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        if (validateForm()) {
-            try {
-                const formData = new FormData(contactForm);
-                const response = await fetch('/submit-form', {
-                    method: 'POST',
-                    body: formData
-                });
-                if (response.ok) {
-                    showNotification('Thank you for your message. We will get back to you soon!', 'success');
-                    contactForm.reset();
-                } else {
-                    throw new Error('Form submission failed');
-                }
-            } catch (error) {
-                showNotification('Oops! Something went wrong. Please try again later.', 'error');
-            }
-        }
-    });
 
     // Email Form
-    (function(){
-        emailjs.init("OvxBoAeOh8WVtJn3o"); // Replace with your EmailJS user ID
-     })();
-
-    function showError(input, message) {
-        clearError(input);
-        const error = document.createElement('div');
-        error.className = 'error-message';
-        error.textContent = message;
-        input.parentNode.insertBefore(error, input.nextSibling);
-        input.classList.add('error');
-    }
-
-    function clearError(input) {
-        const error = input.nextElementSibling;
-        if (error && error.className === 'error-message') {
-            error.remove();
-        }
-        input.classList.remove('error');
-    }
-
-    function showNotification(message, type) {
-        const notification = document.createElement('div');
-        notification.className = `notification ${type}`;
-        notification.textContent = message;
-        document.body.appendChild(notification);
-        setTimeout(() => notification.remove(), 5000);
-    }
+    (function () {
+        emailjs.init("OvxBoAeOh8WVtJn3o");
+    })();
+    
+    document.getElementById('contact-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+    
+        emailjs.sendForm('service_q2twg0b', 'service_q2twg0b', this)
+            .then(function() {
+                console.log('SUCCESS!');
+                alert('Your message has been sent successfully!');
+            }, function(error) {
+                console.log('FAILED...', error);
+                alert('There was an error sending your message. Please try again later or give us a call.');
+            });
+    });
 
     // Animate on scroll
     const animateOnScroll = (entries, observer) => {
@@ -179,28 +145,3 @@ document.addEventListener('DOMContentLoaded', function() {
     setInterval(showNextGroup, 4000); // Rotate every 4 seconds
 });
 
-document.getElementById('contact-form').addEventListener('submit', function (event) {
-    let valid = true;
-    const firstName = document.querySelector('input[name="first_name"]');
-    const lastName = document.querySelector('input[name="last_name"]');
-    const email = document.querySelector('input[name="email"]');
-
-    if (!firstName.value.trim() || !lastName.value.trim() || !email.value.trim()) {
-        valid = false;
-        alert('Please fill out all required fields.');
-    }
-
-    if (!validateEmail(email.value)) {
-        valid = false;
-        alert('Please enter a valid email address.');
-    }
-
-    if (!valid) {
-        event.preventDefault();
-    }
-});
-
-function validateEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(String(email).toLowerCase());
-}
