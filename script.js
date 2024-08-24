@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
    (function () {
     emailjs.init("OvxBoAeOh8WVtJn3o"); // Replace with your EmailJS User ID
 })();
-
+ 
 // Handle Form Submission
 document.getElementById('contact-form').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent the default form submission
