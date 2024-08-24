@@ -75,14 +75,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
    // Email Form
-(function () {
-    emailjs.init("OvxBoAeOh8WVtJn3o"); // Your User ID
+   (function () {
+    emailjs.init("OvxBoAeOh8WVtJn3o"); // Replace with your EmailJS User ID
 })();
 
+// Handle Form Submission
 document.getElementById('contact-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    console.log("Form Submitted");  // Check if the function is triggered
+    event.preventDefault(); // Prevent the default form submission
 
+    // Send the form data using EmailJS
     emailjs.sendForm('service_q2twg0b', 'template_vvuy0mu', this)
         .then(function() {
             console.log('SUCCESS!');
