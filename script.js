@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM fully loaded and parsed');
 
-    // EmailJS is initialized in the HTML, so we don't need to initialize it here again
-
     // Add event listener to the contact form submission
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
@@ -20,29 +18,29 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Form values collected:', { firstName, lastName, email, subject, message });
 
             // Prepare the email parameters
-    const templateParams = {
-    from_name: `${firstName} ${lastName}`,
-    message: message,
-    reply_to: email,
-    subject: subject
-};
+            const templateParams = {
+                from_name: `${firstName} ${lastName}`,
+                message: message,
+                reply_to: email,
+                subject: subject
+            };
 
-console.log('Sending email with params:', templateParams);
+            console.log('Sending email with params:', templateParams);
 
-// Send the email using EmailJS
-emailjs.send('service_q2twg0b', 'template_vvuy0mu', templateParams)
-    .then(function(response) {
-        console.log('EmailJS Success Response:', response);
-        alert('Your message has been sent successfully!');
-        contactForm.reset();
-    })
-    .catch(function(error) {
-        console.error('EmailJS Error:', error);
-        if (error.text) {
-            console.error('Error details:', error.text);
-        }
-        alert('There was an error sending your message. Please check the console for details and try again later.');
-    });
+            // Send the email using EmailJS
+            emailjs.send('service_q2twg0b', 'template_vvuy0mu', templateParams)
+                .then(function(response) {
+                    console.log('EmailJS Success Response:', response);
+                    alert('Your message has been sent successfully!');
+                    contactForm.reset();
+                })
+                .catch(function(error) {
+                    console.error('EmailJS Error:', error);
+                    if (error.text) {
+                        console.error('Error details:', error.text);
+                    }
+                    alert('There was an error sending your message. Please check the console for details and try again later.');
+                });
         });
     } else {
         console.error('Contact form not found in the DOM');
@@ -57,7 +55,7 @@ emailjs.send('service_q2twg0b', 'template_vvuy0mu', templateParams)
             navLinks.classList.toggle('active');
         });
     }
-
+});
     // Testimonial slider
     const testimonialSlider = document.querySelector('.testimonial-slider');
     if (testimonialSlider) {
@@ -90,4 +88,3 @@ emailjs.send('service_q2twg0b', 'template_vvuy0mu', templateParams)
             });
         });
     });
-});
