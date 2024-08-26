@@ -1,16 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM fully loaded and parsed');
 
-    // Check if EmailJS is defined
-    if (typeof emailjs === 'undefined') {
-        console.error('EmailJS is not defined. Make sure the SDK is loaded correctly.');
-        return;
-    }
-
-    // Initialize EmailJS (if not already initialized in HTML)
-    if (!emailjs.isInitialized) {
-        emailjs.init("OvxBoAeOh8WVtJn3o");
-    }
+    // EmailJS initialization
+    emailjs.init("OvxBoAeOh8WVtJn3o");
 
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
@@ -49,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (error.text) {
                         console.error('Error details:', error.text);
                     }
-                    alert('There was an error sending your message. Please check the console for details and try again later.');
+                    alert('There was an error sending your message. Please try again later or contact us directly at 231-352-9253.');
                 });
         });
     } else {
@@ -65,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
             navLinks.classList.toggle('active');
         });
     }
-});
+
     // Testimonial slider
     const testimonialSlider = document.querySelector('.testimonial-slider');
     if (testimonialSlider) {
@@ -98,3 +90,4 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     });
+});
