@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Add event listener to the contact form submission
     document.getElementById('contact-form').addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent the form from submitting the traditional way
+        event.preventDefault();
 
         console.log('Form submission initiated');
 
@@ -31,65 +31,24 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(function(response) {
                 console.log('SUCCESS!', response.status, response.text);
                 alert('Your message has been sent successfully!');
-                document.getElementById('contact-form').reset(); // Clear the form
+                document.getElementById('contact-form').reset();
             }, function(error) {
                 console.error('FAILED...', error);
                 alert('There was an error sending your message. Please try again later.');
             });
     });
 
-    // Mobile menu toggle with animation
-    const navLinks = document.querySelector('.nav-links');
+    // Mobile menu toggle
     const burger = document.querySelector('.burger');
-    if (burger) {
+    const navLinks = document.querySelector('.nav-links');
+    if (burger && navLinks) {
         burger.addEventListener('click', function() {
             this.classList.toggle('active');
             navLinks.classList.toggle('active');
         });
     }
 
-    // Smooth scrolling with IntersectionObserver
-    const navItems = document.querySelectorAll('.nav-links a');
-    const sections = document.querySelectorAll('section');
-
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.7
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const id = entry.target.getAttribute('id');
-                navItems.forEach(item => {
-                    item.classList.remove('active');
-                    if (item.getAttribute('href') === `#${id}`) {
-                        item.classList.add('active');
-                    }
-                });
-            }
-        });
-    }, observerOptions);
-
-    sections.forEach(section => observer.observe(section));
-
-    // Lazy loading images
-    const lazyImages = document.querySelectorAll('img[data-src]');
-    const lazyLoadObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src;
-                img.removeAttribute('data-src');
-                observer.unobserve(img);
-            }
-        });
-    });
-
-    lazyImages.forEach(img => lazyLoadObserver.observe(img));
-
-    // Dynamic testimonial slider
+    // Testimonial slider
     const testimonialSlider = document.querySelector('.testimonial-slider');
     if (testimonialSlider) {
         const testimonials = testimonialSlider.querySelectorAll('.testimonial');
@@ -112,21 +71,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Animate scroll
-    const animateOnScroll = (entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('animate');
-                observer.unobserve(entry.target);
-            }
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
         });
-    };
-
-    const animationObserver = new IntersectionObserver(animateOnScroll, {
-        threshold: 0.1
-    });
-
-    document.querySelectorAll('.animate-on-scroll').forEach(el => {
-        animationObserver.observe(el);
     });
 });
