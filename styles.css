@@ -164,61 +164,38 @@ header {
     background-color: var(--background-color);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     position: fixed;
-    top: 0; /* Ensure it sticks to the top */
+    top: 0;
     width: 100%;
     z-index: 1000;
     padding: 0.5rem 0;
-}
-
-/* Ensure the navigation bar stays visible on top */
-.nav-links.active {
     display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 100%; /* Just below the header */
-    left: 0;
-    width: 100%;
-    background-color: var(--primary-color);
+    justify-content: space-between;
+    align-items: center;
 }
 
-.burger {
-    display: flex; /* Make sure the burger menu is visible on mobile */
-    cursor: pointer;
-}
-
-.nav-links a {
-    padding: 10px 15px;
-    font-size: 1.1rem;
-    color: #fff; /* Make text white for better contrast */
-}
-
-.nav-links a:hover {
-    color: var(--accent-color);
-}
-
-/* Logo adjustments */
-.logo img {
-    height: 50px; /* Slightly smaller on mobile */
-}
-
+/* Navigation Container */
 nav.container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 1.5rem;
 }
 
+/* Logo */
 .logo img {
     height: 70px;
     width: auto;
 }
 
+/* Navigation Links */
 .nav-links {
     display: flex;
     list-style: none;
     align-items: center;
+    margin-left: auto;
 }
 
 .nav-links li {
@@ -231,83 +208,29 @@ nav.container {
     font-weight: 600;
     font-size: 1rem;
     transition: color 0.3s ease;
-    white-space: nowrap;  /* Prevents text from wrapping */
+    white-space: nowrap;
 }
 
 .nav-links a:hover {
     color: var(--primary-color);
 }
 
-.cta-button {
-    display: inline-block;
-    background-color: var(--accent-color);
-    color: white;
-    padding: 0.8rem 1.5rem;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: background-color 0.3s ease;
-}
-
-.cta-button:hover {
-    background-color: #e69500;
-}
-
-/* Responsive Design */
-@media (max-width: 992px) {
-    .nav-links li {
-        margin-left: 1rem;
-    }
-
-    .logo img {
-        height: 60px;
-    }
-}
-
-@media (max-width: 768px) {
-    nav.container {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .nav-links {
-        flex-direction: column;
-        align-items: flex-start;
-        width: 100%;
-        display: none;
-    }
-
-    .nav-links li {
-        margin-left: 0;
-        margin-bottom: 1rem;
-    }
-
-    .nav-links.active {
-        display: flex;
-    }
-
-    .burger {
-        display: block;
-        cursor: pointer;
-        padding: 0.5rem 0;
-    }
-
-    .burger div {
-        width: 25px;
-        height: 3px;
-        background-color: var(--text-color);
-        margin: 4px 0;
-        transition: 0.4s;
-    }
-}
-
-/* Updated Burger Menu */
+/* Burger Menu */
 .burger {
-    display: none; /* Show only on mobile */
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    padding: 0.5rem 0;
+}
+
+.burger div {
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-color);
+    margin: 4px 0;
+    transition: 0.4s;
 }
 
 .burger.active div:nth-child(1) {
@@ -322,64 +245,70 @@ nav.container {
     transform: rotate(45deg) translate(-5px, -6px);
 }
 
-.nav-links {
-    display: none;
+.nav-links.active {
+    display: flex;
     flex-direction: column;
     align-items: flex-start;
-    background-color: var(--primary-color); /* Ensures better visibility on mobile */
     position: absolute;
     top: 100%;
     left: 0;
     width: 100%;
+    background-color: var(--primary-color);
     padding: 1rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease-in-out;
-    z-index: 999; /* Ensures it overlays other content */
+    z-index: 999;
 }
 
-.nav-links.active {
-    display: flex;
+.nav-links.active a {
+    color: #fff; /* Ensure links are visible on mobile */
+    padding: 10px 0;
 }
 
-.nav-links li {
-    margin: 0.5rem 0;
-}
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+    .nav-links li {
+        margin-left: 1rem;
+    }
 
-.burger {
-    display: flex; /* Show on mobile */
+    .logo img {
+        height: 60px;
+    }
 }
 
 @media (max-width: 768px) {
     .burger {
-        display: flex; /* Show on mobile */
+        display: flex;
     }
 
     .nav-links {
+        display: none;
         flex-direction: column;
         align-items: flex-start;
         width: 100%;
-        display: none;
     }
 
     .nav-links.active {
-        display: flex; /* Display menu when active */
+        display: flex;
+    }
+
+    .nav-links li {
+        margin: 0.5rem 0;
     }
 
     .nav-links a {
         padding: 10px 15px;
-        font-size: 1.1rem; /* Increase font size for better readability */
-        color: #fff; /* White text for better contrast on mobile */
+        font-size: 1.1rem;
+        color: #fff;
     }
 
     .nav-links a:hover {
-        color: var(--accent-color); /* Orange for hover effect */
+        color: var(--accent-color);
     }
 
     .logo img {
-        height: 50px; /* Slightly smaller on mobile */
+        height: 50px;
     }
 }
+
 
 
 /* Hero Section */
@@ -667,9 +596,10 @@ header {
     }
 }
 
+/* Testimonials Section */
 .testimonials {
     padding: 3rem 1rem;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images2/sprinkler2.jpg'); /* Restore background */
+    background-image: url('images2/sprinkler2.jpg'); /* Ensure the correct path */
     background-size: cover;
     background-position: center;
     color: #ffffff;
@@ -678,37 +608,23 @@ header {
 
 .testimonial-slider {
     display: flex;
-    flex-direction: column; /* Stack testimonials on mobile */
-    gap: 2rem; /* Adjust gap for better spacing */
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
 }
 
 .testimonial {
-    background-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent background */
     padding: 1.5rem;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     font-size: 1rem;
     color: #333333;
     line-height: 1.6;
-    max-width: 100%; /* Ensure testimonials do not overflow */
-    margin: 0 auto; /* Center testimonials */
+    max-width: 300px; /* Constrain width */
+    margin: 0 auto;
 }
 
-.testimonial:hover {
-    transform: scale(1.02);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-}
-
-/* Adjust font size for readability on smaller screens */
-@media (max-width: 768px) {
-    .testimonial p {
-        font-size: 1rem; /* Increase font size for better readability */
-    }
-    .testimonial strong {
-        font-size: 1rem;
-    }
-}
-/* Responsive Design */
 @media (max-width: 768px) {
     .testimonial {
         flex: 1 1 100%;  /* Stack testimonials on smaller screens */
