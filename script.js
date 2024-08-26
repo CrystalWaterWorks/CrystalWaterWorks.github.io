@@ -1,5 +1,5 @@
-// Initialize EmailJS when the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize EmailJS
     emailjs.init("OvxBoAeOh8WVtJn3o");
     console.log('EmailJS initialized');
 
@@ -42,11 +42,17 @@ document.addEventListener('DOMContentLoaded', function() {
 // Function to handle classList errors (example function for your context)
 function showNextGroup() {
     var elements = document.querySelectorAll('.your-class-selector'); // Replace with your actual selector
-    elements.forEach(function(element) {
+
+    if (elements.length === 0) {
+        console.error('No elements found with the selector .your-class-selector');
+        return;
+    }
+
+    elements.forEach(function(element, index) {
         if (element && element.classList) {
             element.classList.add('new-class'); // Replace with your actual class
         } else {
-            console.error('Element or classList not found:', element);
+            console.error(`Element at index ${index} is null or undefined, cannot apply classList.`);
         }
     });
 }

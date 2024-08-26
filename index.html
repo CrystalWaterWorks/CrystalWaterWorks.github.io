@@ -270,28 +270,28 @@
                 <h2>Reach out today!</h2> 
                 <form id="contact-form">
                     <label for="first_name">First Name:</label>
-                    <input type="text" id="first_name" name="first_name" required>
+                    <input type="text" id="first_name" name="first_name" autocomplete="given-name" required>
                   
                     <label for="last_name">Last Name:</label>
-                    <input type="text" id="last_name" name="last_name" required>
+                    <input type="text" id="last_name" name="last_name" autocomplete="family-name" required>
                   
                     <label for="email">Your Email:</label>
-                    <input type="email" id="email" name="email" required>
+                    <input type="email" id="email" name="email" autocomplete="email" required>
                   
                     <label for="subject">Subject:</label>
-                    <select id="subject" name="subject" required>
+                    <select id="subject" name="subject" autocomplete="off" required>
                         <option value="Request a Quote">Request a Quote</option>
                         <option value="Service Request">Service Request</option>
                         <option value="Other">Other</option>
                     </select>
                   
                     <label for="message">Tell us about your irrigation needs:</label>
-                    <textarea id="message" name="message" required></textarea>
+                    <textarea id="message" name="message" autocomplete="off" required></textarea>
                        
                     <button type="submit">Submit Inquiry</button>
                 </form>
             </div>
-        </section>        
+        </section>      
             </div>
         </section>
     </main>
