@@ -38,40 +38,16 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     });
 
-    // Function to handle classList errors (example function for your context)
-    function showNextGroup() {
-        var elements = document.querySelectorAll('.your-class-selector'); // Replace with your actual selector
-
-        if (!elements || elements.length === 0) {
-            console.error('No elements found with the selector .your-class-selector');
-            return;
-        }
-
-        elements.forEach(function(element, index) {
-            if (element && element.classList) {
-                element.classList.add('new-class'); // Replace with your actual class
-            } else {
-                console.error(`Element at index ${index} is null or undefined, cannot apply classList.`);
-            }
-        });
-    }
-});
-
-
-document.addEventListener('DOMContentLoaded', function() {
     // Mobile menu toggle with animation
     const navLinks = document.querySelector('.nav-links');
-    const burger = document.createElement('div');
-    burger.classList.add('burger');
-    burger.innerHTML = '<span></span><span></span><span></span>';
-    document.querySelector('nav').appendChild(burger);
+    const burger = document.querySelector('.burger');
+    if (burger) {
+        burger.addEventListener('click', function() {
+            this.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+    }
 
-    burger.addEventListener('click', function() {
-        this.classList.toggle('active');
-        navLinks.classList.toggle('active');
-    });
-
-    
     // Smooth scrolling with IntersectionObserver
     const navItems = document.querySelectorAll('.nav-links a');
     const sections = document.querySelectorAll('section');
@@ -115,23 +91,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Dynamic testimonial slider
     const testimonialSlider = document.querySelector('.testimonial-slider');
-    const testimonials = testimonialSlider.querySelectorAll('.testimonial');
-    let currentTestimonial = 0;
+    if (testimonialSlider) {
+        const testimonials = testimonialSlider.querySelectorAll('.testimonial');
+        let currentTestimonial = 0;
 
-    function showTestimonial(index) {
-        testimonials.forEach((testimonial, i) => {
-            testimonial.style.transform = `translateX(${100 * (i - index)}%)`;
-        });
+        function showTestimonial(index) {
+            testimonials.forEach((testimonial, i) => {
+                testimonial.style.transform = `translateX(${100 * (i - index)}%)`;
+            });
+        }
+
+        function nextTestimonial() {
+            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+            showTestimonial(currentTestimonial);
+        }
+
+        if (testimonials.length > 0) {
+            setInterval(nextTestimonial, 5000);
+            showTestimonial(currentTestimonial);
+        }
     }
-
-    function nextTestimonial() {
-        currentTestimonial = (currentTestimonial + 1) % testimonials.length;
-        showTestimonial(currentTestimonial);
-    }
-
-    setInterval(nextTestimonial, 5000);
-    showTestimonial(currentTestimonial);
-
 
     // Animate scroll
     const animateOnScroll = (entries, observer) => {
@@ -150,46 +129,4 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.animate-on-scroll').forEach(el => {
         animationObserver.observe(el);
     });
-});
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    const groups = document.querySelectorAll('.testimonial-group');
-    let currentGroup = 0;
-
-    function showNextGroup() {
-        groups[currentGroup].classList.remove('active');
-        currentGroup = (currentGroup + 1) % groups.length;
-        groups[currentGroup].classList.add('active');
-    }
-
-    setInterval(showNextGroup, 4000); // Rotate every 4 seconds
-});
-document.addEventListener('DOMContentLoaded', function() {
-    const groups = document.querySelectorAll('.testimonial-group');
-    let currentGroup = 0;
-
-    function showNextGroup() {
-        groups[currentGroup].classList.remove('active');
-        currentGroup = (currentGroup + 1) % groups.length;
-        groups[currentGroup].classList.add('active');
-    }
-
-    setInterval(showNextGroup, 4000); // Rotate every 4 seconds
-});
-document.addEventListener('DOMContentLoaded', function() {
-    const groups = document.querySelectorAll('.testimonial-group');
-    let currentGroup = 0;
-
-    function showNextGroup() {
-        groups.forEach(group => group.style.transform = `translateX(-${100 * currentGroup}%)`);
-        currentGroup = (currentGroup + 1) % groups.length;
-    }
-
-    setInterval(showNextGroup, 4000); // Rotate every 4 seconds
-});
-
-document.querySelector('.burger').addEventListener('click', () => {
-    document.querySelector('.nav-links').classList.toggle('active');
-    document.querySelector('.burger').classList.toggle('active');
 });
