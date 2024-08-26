@@ -73,24 +73,39 @@ document.addEventListener('DOMContentLoaded', function() {
     showTestimonial(currentTestimonial);
 
 
-
-   // Email Form
-   (function () {
-    emailjs.init("OvxBoAeOh8WVtJn3o"); 
+   // Email Section
+  // Initialize EmailJS with your Public Key
+(function() {
+    emailjs.init("OvxBoAeOh8WVtJn3o");
 })();
- 
-// Form Submission
-document.getElementById('contact-form').addEventListener('submit', function(event) {
-    event.preventDefault();
 
-    // Send the form data - EmailJS
-    emailjs.sendForm('service_q2twg0b', 'template_vvuy0mu', this)
-        .then(function() {
-            console.log('SUCCESS!');
+document.getElementById('contact-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the form from submitting the traditional way
+
+    // Get form values
+    var firstName = document.getElementById('first_name').value;
+    var lastName = document.getElementById('last_name').value;
+    var email = document.getElementById('email').value;
+    var subject = document.getElementById('subject').value;
+    var message = document.getElementById('message').value;
+
+    // Prepare the email parameters
+    var templateParams = {
+        from_name: firstName + " " + lastName,
+        from_email: email,
+        subject: subject,
+        message: message
+    };
+
+    // Send the email using EmailJS
+    emailjs.send('service_q2twg0b', 'template_vvuy0mu', templateParams)
+        .then(function(response) {
+            console.log('SUCCESS!', response.status, response.text);
             alert('Your message has been sent successfully!');
+            document.getElementById('contact-form').reset(); // Clear the form
         }, function(error) {
-            console.log('FAILED...', error);
-            alert('There was an error sending your message. Please try again later or give us a call.');
+            console.error('FAILED...', error);
+            alert('There was an error sending your message. Please try again later.');
         });
 });
 
