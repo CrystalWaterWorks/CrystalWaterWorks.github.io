@@ -57,6 +57,32 @@ h1, h2, h3 {
     width: 100%;
 }
 
+/* Contact Us Button in Nav Bar */
+.nav-links .cta-button {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-links .cta-button:hover {
+    background-color: #e69500;
+    transform: translateY(-2px); /* Slight lift effect on hover */
+}
+
+/* Responsive Adjustments for Navigation Button */
+@media (max-width: 768px) {
+    .nav-links .cta-button {
+        width: 100%; /* Full width on mobile */
+        text-align: center;
+        padding: 1rem; /* Increase padding on mobile for easier tapping */
+    }
+}
+
 /* About Section */
 .about-section {
     padding: 4rem 0;
@@ -326,6 +352,31 @@ nav.container {
     padding: 20px; /* Add padding to prevent text from touching the edges */
     box-sizing: border-box;
     text-align: center;
+}
+/* Get an Estimate Button in Hero Section */
+.hero .cta-button {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.hero .cta-button:hover {
+    background-color: #e69500;
+    transform: translateY(-2px); /* Slight lift effect on hover */
+}
+
+/* Responsive Adjustments for Hero Button */
+@media (max-width: 768px) {
+    .hero .cta-button {
+        width: 100%; /* Full width on mobile */
+        text-align: center;
+        padding: 1rem; /* Increase padding on mobile for easier tapping */
+    }
 }
 /* Changing 'Works' to a Different Color */
 
