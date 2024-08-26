@@ -164,9 +164,41 @@ header {
     background-color: var(--background-color);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     position: fixed;
+    top: 0; /* Ensure it sticks to the top */
     width: 100%;
     z-index: 1000;
     padding: 0.5rem 0;
+}
+
+/* Ensure the navigation bar stays visible on top */
+.nav-links.active {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%; /* Just below the header */
+    left: 0;
+    width: 100%;
+    background-color: var(--primary-color);
+}
+
+.burger {
+    display: flex; /* Make sure the burger menu is visible on mobile */
+    cursor: pointer;
+}
+
+.nav-links a {
+    padding: 10px 15px;
+    font-size: 1.1rem;
+    color: #fff; /* Make text white for better contrast */
+}
+
+.nav-links a:hover {
+    color: var(--accent-color);
+}
+
+/* Logo adjustments */
+.logo img {
+    height: 50px; /* Slightly smaller on mobile */
 }
 
 nav.container {
@@ -635,30 +667,31 @@ header {
     }
 }
 
-/* Updated Testimonials Section */
 .testimonials {
     padding: 3rem 1rem;
-    background-color: #e3f2fd;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images2/sprinkler2.jpg'); /* Restore background */
+    background-size: cover;
+    background-position: center;
+    color: #ffffff;
     text-align: center;
 }
 
 .testimonial-slider {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center; /* Center testimonials on mobile */
-    gap: 1rem;
+    flex-direction: column; /* Stack testimonials on mobile */
+    gap: 2rem; /* Adjust gap for better spacing */
 }
 
 .testimonial {
-    flex: 1 1 100%; /* Stack testimonials vertically on smaller screens */
-    margin-bottom: 1rem;
     background-color: #ffffff;
-    padding: 1rem;
+    padding: 1.5rem;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    font-size: 1rem; /* Increase font size for better readability */
+    font-size: 1rem;
     color: #333333;
-    line-height: 1.4;
+    line-height: 1.6;
+    max-width: 100%; /* Ensure testimonials do not overflow */
+    margin: 0 auto; /* Center testimonials */
 }
 
 .testimonial:hover {
