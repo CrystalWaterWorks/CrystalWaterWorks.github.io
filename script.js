@@ -1,3 +1,49 @@
+// Initialize EmailJS with your Public Key
+(function() {
+    emailjs.init("OvxBoAeOh8WVtJn3o");
+})();
+
+document.getElementById('contact-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the form from submitting the traditional way
+
+    // Get form values
+    var firstName = document.getElementById('first_name').value;
+    var lastName = document.getElementById('last_name').value;
+    var email = document.getElementById('email').value;
+    var subject = document.getElementById('subject').value;
+    var message = document.getElementById('message').value;
+
+    // Prepare the email parameters
+    var templateParams = {
+        from_name: firstName + " " + lastName,
+        from_email: email,
+        subject: subject,
+        message: message
+    };
+
+    // Send the email using EmailJS
+    emailjs.send('service_q2twg0b', 'template_vvuy0mu', templateParams)
+        .then(function(response) {
+            console.log('SUCCESS!', response.status, response.text);
+            alert('Your message has been sent successfully!');
+            document.getElementById('contact-form').reset(); // Clear the form
+        }, function(error) {
+            console.error('FAILED...', error);
+            alert('There was an error sending your message. Please try again later.');
+        });
+});
+
+// Assuming showNextGroup is the function causing the classList errors
+function showNextGroup() {
+    var elements = document.querySelectorAll('.your-class-selector'); // Replace with your actual selector
+    elements.forEach(function(element) {
+        // Check if the element and its classList exist before manipulating it
+        if (element && element.classList) {
+            element.classList.add('new-class'); // Replace with your actual class
+        }
+    });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     // Mobile menu toggle with animation
     const navLinks = document.querySelector('.nav-links');
@@ -72,42 +118,6 @@ document.addEventListener('DOMContentLoaded', function() {
     setInterval(nextTestimonial, 5000);
     showTestimonial(currentTestimonial);
 
-
-   // Email Section
-  // Initialize EmailJS with your Public Key
-(function() {
-    emailjs.init("OvxBoAeOh8WVtJn3o");
-})();
-
-document.getElementById('contact-form').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent the form from submitting the traditional way
-
-    // Get form values
-    var firstName = document.getElementById('first_name').value;
-    var lastName = document.getElementById('last_name').value;
-    var email = document.getElementById('email').value;
-    var subject = document.getElementById('subject').value;
-    var message = document.getElementById('message').value;
-
-    // Prepare the email parameters
-    var templateParams = {
-        from_name: firstName + " " + lastName,
-        from_email: email,
-        subject: subject,
-        message: message
-    };
-
-    // Send the email using EmailJS
-    emailjs.send('service_q2twg0b', 'template_vvuy0mu', templateParams)
-        .then(function(response) {
-            console.log('SUCCESS!', response.status, response.text);
-            alert('Your message has been sent successfully!');
-            document.getElementById('contact-form').reset(); // Clear the form
-        }, function(error) {
-            console.error('FAILED...', error);
-            alert('There was an error sending your message. Please try again later.');
-        });
-});
 
     // Animate scroll
     const animateOnScroll = (entries, observer) => {
