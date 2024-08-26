@@ -1,7 +1,17 @@
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM fully loaded and parsed');
 
-    // Add event listener to the contact form submission
+    // Check if EmailJS is defined
+    if (typeof emailjs === 'undefined') {
+        console.error('EmailJS is not defined. Make sure the SDK is loaded correctly.');
+        return;
+    }
+
+    // Initialize EmailJS (if not already initialized in HTML)
+    if (!emailjs.isInitialized) {
+        emailjs.init("OvxBoAeOh8WVtJn3o");
+    }
+
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
         contactForm.addEventListener('submit', function(event) {
