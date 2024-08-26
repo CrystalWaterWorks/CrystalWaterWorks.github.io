@@ -37,25 +37,25 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert('There was an error sending your message. Please try again later.');
             });
     });
-});
 
-// Function to handle classList errors (example function for your context)
-function showNextGroup() {
-    var elements = document.querySelectorAll('.your-class-selector'); // Replace with your actual selector
+    // Function to handle classList errors (example function for your context)
+    function showNextGroup() {
+        var elements = document.querySelectorAll('.your-class-selector'); // Replace with your actual selector
 
-    if (elements.length === 0) {
-        console.error('No elements found with the selector .your-class-selector');
-        return;
-    }
-
-    elements.forEach(function(element, index) {
-        if (element && element.classList) {
-            element.classList.add('new-class'); // Replace with your actual class
-        } else {
-            console.error(`Element at index ${index} is null or undefined, cannot apply classList.`);
+        if (!elements || elements.length === 0) {
+            console.error('No elements found with the selector .your-class-selector');
+            return;
         }
-    });
-}
+
+        elements.forEach(function(element, index) {
+            if (element && element.classList) {
+                element.classList.add('new-class'); // Replace with your actual class
+            } else {
+                console.error(`Element at index ${index} is null or undefined, cannot apply classList.`);
+            }
+        });
+    }
+});
 
 
 document.addEventListener('DOMContentLoaded', function() {
