@@ -76,14 +76,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
    // Email Form
    (function () {
-    emailjs.init("OvxBoAeOh8WVtJn3o"); // Replace with your EmailJS User ID
+    emailjs.init("OvxBoAeOh8WVtJn3o"); 
 })();
  
-// Handle Form Submission
+// Form Submission
 document.getElementById('contact-form').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent the default form submission
+    event.preventDefault();
 
-    // Send the form data using EmailJS
+    // Send the form data - EmailJS
     emailjs.sendForm('service_q2twg0b', 'template_vvuy0mu', this)
         .then(function() {
             console.log('SUCCESS!');
@@ -94,7 +94,7 @@ document.getElementById('contact-form').addEventListener('submit', function(even
         });
 });
 
-    // Animate on scroll
+    // Animate scroll
     const animateOnScroll = (entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -112,6 +112,8 @@ document.getElementById('contact-form').addEventListener('submit', function(even
         animationObserver.observe(el);
     });
 });
+
+
 document.addEventListener('DOMContentLoaded', function() {
     const groups = document.querySelectorAll('.testimonial-group');
     let currentGroup = 0;

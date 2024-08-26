@@ -269,9 +269,9 @@ nav.container {
     }
 }
 
-/* Burger Menu */
+/* Updated Burger Menu */
 .burger {
-    display: none;
+    display: none; /* Show only on mobile */
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -288,6 +288,65 @@ nav.container {
 
 .burger.active div:nth-child(3) {
     transform: rotate(45deg) translate(-5px, -6px);
+}
+
+.nav-links {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: var(--primary-color); /* Ensures better visibility on mobile */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    padding: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    z-index: 999; /* Ensures it overlays other content */
+}
+
+.nav-links.active {
+    display: flex;
+}
+
+.nav-links li {
+    margin: 0.5rem 0;
+}
+
+.burger {
+    display: flex; /* Show on mobile */
+}
+
+@media (max-width: 768px) {
+    .burger {
+        display: flex; /* Show on mobile */
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        display: none;
+    }
+
+    .nav-links.active {
+        display: flex; /* Display menu when active */
+    }
+
+    .nav-links a {
+        padding: 10px 15px;
+        font-size: 1.1rem; /* Increase font size for better readability */
+        color: #fff; /* White text for better contrast on mobile */
+    }
+
+    .nav-links a:hover {
+        color: var(--accent-color); /* Orange for hover effect */
+    }
+
+    .logo img {
+        height: 50px; /* Slightly smaller on mobile */
+    }
 }
 
 
@@ -307,7 +366,7 @@ nav.container {
     box-sizing: border-box;
     text-align: center;
 }
-/* Changing Works to a Different Color */
+/* Changing 'Works' to a Different Color */
 
 .homepage-title {
     font-size: 3rem; /* Adjust size based on your design */
@@ -576,61 +635,46 @@ header {
     }
 }
 
-/* Testimonials Section */
+/* Updated Testimonials Section */
 .testimonials {
     padding: 3rem 1rem;
     background-color: #e3f2fd;
     text-align: center;
 }
-.testimonials {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images2/sprinkler2.jpg');
-    background-size: cover;
-    background-position: center;
-    color: #ffffff; /* Ensures text color is white */
-}
-
-.testimonials h2 {
-    font-size: 1.75rem;
-    margin-bottom: 1.5rem;
-    color: #ffffff;
-}
 
 .testimonial-slider {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center; /* Center testimonials on mobile */
     gap: 1rem;
 }
 
 .testimonial {
-    flex: 1 1 30%;  /* Adjusted to fit 3 testimonials per row */
-    background-color: #f0f7ff;
+    flex: 1 1 100%; /* Stack testimonials vertically on smaller screens */
+    margin-bottom: 1rem;
+    background-color: #ffffff;
     padding: 1rem;
-    border: 2px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    font-size: 0.9rem;
-    color: #241ea8;
+    font-size: 1rem; /* Increase font size for better readability */
+    color: #333333;
     line-height: 1.4;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .testimonial:hover {
-    transform: scale(1.03);
-    box-shadow: 0 8px 14px rgba(0, 0, 0, 0.1);
+    transform: scale(1.02);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
-.testimonial p {
-    font-style: italic;
-    margin-bottom: 0.5rem;
+/* Adjust font size for readability on smaller screens */
+@media (max-width: 768px) {
+    .testimonial p {
+        font-size: 1rem; /* Increase font size for better readability */
+    }
+    .testimonial strong {
+        font-size: 1rem;
+    }
 }
-
-.testimonial strong {
-    display: block;
-    margin-top: 0.5rem;
-    color: var(--primary-color);
-}
-
 /* Responsive Design */
 @media (max-width: 768px) {
     .testimonial {
@@ -795,4 +839,54 @@ footer {
 }
 .footer-bottom p {
     margin: 0;
+}
+
+/* Optimize text and image sizes for mobile */
+.about-text p,
+.about-section h2 {
+    font-size: 1rem; /* Smaller font size for better readability on mobile */
+}
+
+.about-image img {
+    max-width: 100%; /* Ensure image scales correctly on mobile */
+}
+
+@media (max-width: 768px) {
+    .about-content {
+        flex-direction: column; /* Stack content vertically on mobile */
+    }
+    .about-image {
+        margin-top: 1.5rem; /* Add margin to separate text and image */
+    }
+}
+
+/* Products Section: Adjust card size and text alignment */
+.product-card {
+    text-align: left; /* Align text to left on mobile for better readability */
+}
+
+@media (max-width: 768px) {
+    .products-grid {
+        grid-template-columns: 1fr; /* Stack products vertically on mobile */
+    }
+}
+
+/* Overall Layout Tweaks for Mobile */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 10px; /* Reduce padding for smaller screens */
+    }
+
+    h1, h2, h3 {
+        font-size: 1.5rem; /* Adjust heading sizes for mobile */
+    }
+
+    p {
+        font-size: 1rem; /* Make paragraph text slightly larger for readability */
+    }
+
+    .cta-button {
+        padding: 0.6rem 1.2rem; /* Slightly reduce padding for buttons */
+        font-size: 1rem;
+    }
 }
