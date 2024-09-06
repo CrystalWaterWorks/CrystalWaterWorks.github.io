@@ -267,13 +267,13 @@
         <section id="contact" class="contact">
             <div class="container">
                 <h2>Reach out today!</h2> 
-                <form id="contact-form" action="https://api.jsemail.net/email" method="POST">
-                    <input type="hidden" name="to" value="crystalwaterworks@gmail.com">
-                    <input type="hidden" name="subject" value="New Inquiry from Website">
+                <form id="contact-form" action="https://formsubmit.co/crystalwaterworks@gmail.com" method="POST">
+                    <input type="hidden" name="_subject" value="New inquiry from Crystal Water Works website">
                     <input type="text" name="name" placeholder="Your Name" required>
                     <input type="email" name="email" placeholder="Your Email" required>
                     <input type="tel" name="phone" placeholder="Your Phone Number">
                     <textarea name="message" placeholder="How can we help you?" required></textarea>
+                    <input type="hidden" name="_next" value="https://crystalwaterworks.github.io/thanks.html">
                     <button type="submit" class="cta-button">Send Message</button>
                 </form>
             </div>
