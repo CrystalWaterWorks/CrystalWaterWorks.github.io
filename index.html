@@ -267,27 +267,14 @@
         <section id="contact" class="contact">
             <div class="container">
                 <h2>Reach out today!</h2> 
-                <form id="contact-form">
-                    <label for="first_name">First Name:</label>
-                    <input type="text" id="first_name" name="first_name" autocomplete="given-name" required>
-                  
-                    <label for="last_name">Last Name:</label>
-                    <input type="text" id="last_name" name="last_name" autocomplete="family-name" required>
-                  
-                    <label for="email">Your Email:</label>
-                    <input type="email" id="email" name="email" autocomplete="email" required>
-                  
-                    <label for="subject">Subject:</label>
-                    <select id="subject" name="subject" autocomplete="off" required>
-                        <option value="Request a Quote">Request a Quote</option>
-                        <option value="Service Request">Service Request</option>
-                        <option value="Other">Other</option>
-                    </select>
-                  
-                    <label for="message">Tell us about your irrigation needs:</label>
-                    <textarea id="message" name="message" autocomplete="off" required></textarea>
-                       
-                    <button type="submit">Submit Inquiry</button>
+                <form id="contact-form" action="https://api.jsemail.net/email" method="POST">
+                    <input type="hidden" name="to" value="crystalwaterworks@gmail.com">
+                    <input type="hidden" name="subject" value="New Inquiry from Website">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                    <input type="tel" name="phone" placeholder="Your Phone Number">
+                    <textarea name="message" placeholder="How can we help you?" required></textarea>
+                    <button type="submit" class="cta-button">Send Message</button>
                 </form>
             </div>
         </section>
