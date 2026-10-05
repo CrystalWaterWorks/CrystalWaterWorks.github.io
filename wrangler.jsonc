@@ -1,0 +1,11 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "crystalwaterworks-github-io",
+  "compatibility_date": "2026-10-05",
+  // Only this folder is published; everything else in the repo stays private.
+  "assets": {
+    "directory": "./public"
+  },
+  // Required by `wrangler preview`, which Workers Builds runs for PR branches.
+  "previews": {}
+}
