@@ -1,0 +1,73 @@
+# Daily end-to-end test of the crystalwaterworks.com contact form.
+# Runs on GitHub because formsubmit.co rate-limits Cloudflare Workers' shared IPs.
+name: Daily contact form test
+
+on:
+  schedule:
+    - cron: "0 14 * * *" # 14:00 UTC = 10am EDT / 9am EST (GitHub may start it a few minutes late)
+  workflow_dispatch: # lets you run it by hand from the Actions tab
+
+permissions:
+  actions: write # used only by the keepalive step below
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Submit [MONITOR] test to formsubmit.co
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          FORM_EMAIL: crystalwaterworks@gmail.com
+        run: |
+          set -u
+          payload=$(jq -n --arg at "$(date -u +%FT%TZ)" '{
+            _subject: "[MONITOR] Daily contact form test",
+            _captcha: "false",
+            _template: "table",
+            name: "Site Monitor",
+            email: env.FORM_EMAIL,
+            message: ("Automated daily test of the website contact form, sent " + $at + ". No action needed.")
+          }')
+
+          # Up to 3 attempts, 2 minutes apart, so one blip doesn't page you.
+          for attempt in 1 2 3; do
+            code=$(curl -s -o body.json -w '%{http_code}' --max-time 20 \
+              -X POST "https://formsubmit.co/ajax/$FORM_EMAIL" \
+              -H 'content-type: application/json' -H 'accept: application/json' \
+              -H 'origin: https://crystalwaterworks.com' -H 'referer: https://crystalwaterworks.com/' \
+              -d "$payload") || code=000
+            echo "Attempt $attempt: HTTP $code $(cat body.json 2>/dev/null)"
+            if [ "$code" = 200 ] && [ "$(jq -r '.success' body.json 2>/dev/null)" = true ]; then
+              echo "Form test passed."; exit 0
+            fi
+            [ "$attempt" -lt 3 ] && sleep 120
+          done
+
+          reason="HTTP $code: $(jq -r '.message // empty' body.json 2>/dev/null || head -c 300 body.json)"
+          run_url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          if [ "$code" = 429 ]; then
+            # Rate limit on GitHub's shared IPs, not proof visitors are affected: warn without @everyone.
+            title="🟡 Contact form test inconclusive (rate limited)"; mention=""; color=15381256
+          else
+            title="🔴 Contact form test FAILED"; mention="@everyone"; color=14689316
+          fi
+          jq -n --arg t "$title" --arg m "$mention" --arg r "$reason" --arg u "$run_url" --argjson c "$color" '{
+            username: "Crystal Waterworks Monitor",
+            content: $m,
+            allowed_mentions: { parse: ["everyone"] },
+            embeds: [{
+              title: $t, color: $c, url: $u,
+              description: "The daily [MONITOR] test submission to the website contact form did not go through. Real visitors'\'' messages may be failing too.",
+              fields: [{ name: "Reason", value: $r }],
+              timestamp: (now | todate)
+            }]
+          }' | curl -s -X POST "$DISCORD_WEBHOOK_URL" -H 'content-type: application/json' -d @-
+          exit 1
+
+      # GitHub pauses scheduled workflows after 60 days with no repo activity. This keeps it enabled.
+      - name: Keep schedule alive
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X PUT "repos/$GITHUB_REPOSITORY/actions/workflows/daily-form-test.yml/enable"
