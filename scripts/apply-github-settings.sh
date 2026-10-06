@@ -13,7 +13,7 @@
 # Safe to re-run: it converges GitHub to what is in the repo.
 set -euo pipefail
 
-REPO="CrystalWaterWorks/CrystalWaterWorks.github.io"
+REPO="CrystalWaterWorks/cww_website"
 cd "$(dirname "$0")/.."
 
 if [ "$(gh api "repos/$REPO" --jq .permissions.admin)" != "true" ]; then
