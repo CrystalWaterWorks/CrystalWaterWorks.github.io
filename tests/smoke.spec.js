@@ -70,6 +70,36 @@ test.describe('home page', () => {
   });
 });
 
+test.describe('mobile menu', () => {
+  test.skip(({ isMobile }) => !isMobile, 'the burger menu only appears on phones');
+
+  test('opens from the burger button and closes after choosing a section', async ({ page }) => {
+    await page.goto('/');
+    const burger = page.getByRole('button', { name: 'Menu' });
+    const aboutLink = page.locator('.nav-links').getByRole('link', { name: 'About Us' });
+
+    await expect(aboutLink).toBeHidden();
+    await burger.tap();
+    await expect(aboutLink).toBeVisible();
+    await expect(burger).toHaveAttribute('aria-expanded', 'true');
+
+    await aboutLink.tap();
+    await expect(aboutLink).toBeHidden();
+    await expect(burger).toHaveAttribute('aria-expanded', 'false');
+    await expect(page).toHaveURL(/#about$/);
+  });
+
+  test('closes when the burger is tapped again', async ({ page }) => {
+    await page.goto('/');
+    const burger = page.getByRole('button', { name: 'Menu' });
+
+    await burger.tap();
+    await expect(page.locator('.nav-links')).toBeVisible();
+    await burger.tap();
+    await expect(page.locator('.nav-links')).toBeHidden();
+  });
+});
+
 test.describe('contact form', () => {
   test('submits name, email and message to formsubmit.co', async ({ page }) => {
     const problems = trackProblems(page);
