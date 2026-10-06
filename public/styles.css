@@ -772,6 +772,12 @@ footer {
     color: var(--secondary-color);
 }
 
+/* Tap-to-call number: same size as surrounding text, never split across lines */
+.footer-section .tel {
+    font-size: inherit;
+    white-space: nowrap;
+}
+
 .leave-review {
     background-color: #f1f1f1;
     padding: 1.5rem 1rem;

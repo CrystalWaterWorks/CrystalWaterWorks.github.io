@@ -51,6 +51,15 @@ test.describe('home page', () => {
     }
   });
 
+  test('phone number is tap-to-call', async ({ page }) => {
+    await page.goto('/');
+
+    await expect(page.locator('footer').getByRole('link', { name: '231-352-9253' })).toHaveAttribute(
+      'href',
+      'tel:+12313529253',
+    );
+  });
+
   test('does not scroll sideways', async ({ page }) => {
     await page.goto('/', { waitUntil: 'networkidle' });
 
