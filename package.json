@@ -1,0 +1,19 @@
+{
+  "name": "crystalwaterworks-site",
+  "private": true,
+  "description": "Dev tooling for crystalwaterworks.com. The site itself is plain HTML/CSS in public/ with no build step.",
+  "scripts": {
+    "dev": "wrangler dev",
+    "lint": "html-validate public/*.html",
+    "test": "playwright test",
+    "check": "npm run lint && npm test"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "html-validate": "11.16.2",
+    "wrangler": "4.147.0"
+  }
+}
